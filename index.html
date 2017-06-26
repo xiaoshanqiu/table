@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<script>
+	window.onload = function(){
+		var otab = document.getElementById('tab');
+		var oinpN = document.getElementById('inp-none');
+		var oinpB = document.getElementById('inp-block');
+		var orow = otab.tBodies[0].rows[0];
+		oinpN.onclick = function(){//删除恢复
+			orow.style.display="none"
+		}
+		oinpB.onclick = function(){
+			orow.style.display="table-row"
+		}
+
+		var oTr = otab.tBodies[0].rows;//隔行变色,鼠标放上背景色
+		var oldColor = null;
+		for(var i = 0;i<oTr.length;i++){
+			if(i%2 != 0){
+				oTr[i].style.backgroundColor="#ccc"
+			}
+			oTr[i].onmouseover = function(){
+				oldColor = this.style.backgroundColor;
+				this.style.backgroundColor='pink'
+			}
+			oTr[i].onmouseout = function(){
+				this.style.backgroundColor=oldColor
+			}
+		}
+
+		var oname = document.getElementById('name');//点击添加行
+		var oage = document.getElementById('age');
+		var oadd = document.getElementById('addb');
+		oadd.onclick = function(){
+			var oTrs = document.createElement('tr')
+
+			var oTd = document.createElement('td');
+			oTd.innerHTML = otab.tBodies[0].rows.length+1;
+			oTrs.appendChild(oTd)
+
+			var oTd = document.createElement('td');
+			oTd.innerHTML = oname.value
+			oTrs.appendChild(oTd)
+
+			var oTd = document.createElement('td');
+			oTd.innerHTML = oage.value
+			oTrs.appendChild(oTd)
+
+			var oTd = document.createElement('td');
+			oTd.innerHTML = '<a href="javascript:;">delete</a>'
+			oTrs.appendChild(oTd)
+
+			otab.tBodies[0].appendChild(oTrs)
+			for(var i = 0;i<oTr.length;i++){
+				if(i%2 != 0){
+					oTr[i].style.backgroundColor="#ccc"
+				}
+				oTr[i].onmouseover = function(){
+					oldColor = this.style.backgroundColor;
+					this.style.backgroundColor='pink'
+				}
+				oTr[i].onmouseout = function(){
+					this.style.backgroundColor=oldColor
+				}
+			} 
+			var del = document.getElementsByTagName('a');//点击delete删除行
+				for(var i = 0;i<del.length;i++){
+					del[i].onclick = function(){
+						otab.tBodies[0].removeChild(this.parentNode.parentNode)
+				}
+			}
+		}
+		var del = document.getElementsByTagName('a');//点击delete删除行
+			for(var i = 0;i<del.length;i++){
+				del[i].onclick = function(){
+					otab.tBodies[0].removeChild(this.parentNode.parentNode)
+			}
+		}
+	}
+</script>
+<body>
+	<input id="inp-none" type="button" value="删除" >
+	<input id="inp-block" type="button" value="恢复" ><br/>
+	<input type="text" id="name" placeholder="name">
+	<input type="text" id="age" placeholder="age">
+	<input type="button" id="addb" value="添加">
+	<table id="tab" style="text-align:center;table-layout: fixed;" border="1px solid black" cellpadding="0" cellspacing="0" width="500px" >
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>姓名</th>
+				<th>年龄</th>
+				<th>删除</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>1</td>
+				<td>Top</td>
+				<td>28</td>
+				<td><a href="javascript:;">delete</a></td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>Top</td>
+				<td>28</td>
+				<td><a href="javascript:;">delete</a></td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>Top</td>
+				<td>28</td>
+				<td><a href="javascript:;">delete</a></td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>Top</td>
+				<td>28</td>
+				<td><a href="javascript:;">delete</a></td>
+			</tr>
+			<tr>
+				<td>5</td>
+				<td>Top</td>
+				<td>28</td>
+				<td><a href="javascript:;">delete</a></td>
+			</tr>
+			<tr>
+				<td>6</td>
+				<td>Top</td>
+				<td>28</td>
+				<td><a href="javascript:;">delete</a></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
